@@ -9,7 +9,7 @@ import time
 
 # The 'poe-api' library is used to interact with Poe.
 # You can install it with: pip install poe-api
-import openai
+from openai import OpenAI
 from typing_extensions import override
 
 from habermas_machine.llm_client import base_client
@@ -50,7 +50,7 @@ class PoeClient(base_client.LLMClient):
     self._calls_between_sleeping = 10
     self._n_calls = 0
 
-    self._model = openai.OpenAI(
+    self._client = openai.OpenAI(
     api_key=os.getenv("POE_API_KEY"), # https://poe.com/api_key
     base_url="https://api.poe.com/v1",
 )
@@ -88,21 +88,23 @@ class PoeClient(base_client.LLMClient):
       print(f'Sleeping for 10 seconds to respect Poe rate limits...')
       time.sleep(10)
 
-sample = self._model.generate_content(
-    prompt,
-    temperature=temperature,
-    max_tokens=max_tokens,
-    terminators=terminators,  # previously stop_sequences
-    stream=False,
-)
     # --- API Call and Response Handling ---
     response_text = ''
     try:
+      response_text = self._client.chat.completions.create(
+        model=self._model_name # Name on Poe
+        messages=[
+          {"role": "system", "content": "You are a helpful assistant."},
+          {"role": "user", "content": prompt},
+      ],
+      temperature=temperature
+      max_tokens=max_tokens
+      stop=list(terminators) if terminators else None,
+)
       # The poe-api library streams the response in chunks.
       # We concatenate the 'text_new' part of each chunk to build the full response.
       # 'with_chat_break=True' ensures that each prompt starts a new, clean conversation
       # context, which is suitable for independent sampling tasks.
-      response_text = sample.candidates[0].content.parts[0].text
 
     except Exception as e:
       # Catching a broad exception as the library might raise various errors
