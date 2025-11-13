@@ -10,6 +10,7 @@ import time
 # The 'poe-api' library is used to interact with Poe.
 # You can install it with: pip install poe-api
 from openai import OpenAI
+import openai
 from typing_extensions import override
 
 from habermas_machine.llm_client import base_client
