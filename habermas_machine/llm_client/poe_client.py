@@ -45,8 +45,6 @@ class PoeClient(base_client.LLMClient):
     self._model_name = model_name
     self._sleep_periodically = sleep_periodically
 
-    # Initialize the Poe client with the token.
-    self._client = poe.Client(token=self._api_key)
 
     # Configuration for periodic sleeping to manage rate limits.
     self._calls_between_sleeping = 10
