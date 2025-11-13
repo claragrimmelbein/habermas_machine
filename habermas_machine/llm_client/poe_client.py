@@ -88,6 +88,16 @@ class PoeClient(base_client.LLMClient):
       print(f'Sleeping for 10 seconds to respect Poe rate limits...')
       time.sleep(10)
 
+        sample = self._model.generate_content(
+        prompt,
+        generation_config=genai.GenerationConfig(
+            temperature=temperature,
+            max_output_tokens=max_tokens,
+            stop_sequences=terminators,
+        ),
+        safety_settings=self._safety_settings,
+        stream=False,
+    )
     # --- API Call and Response Handling ---
     response_text = ''
     try:
