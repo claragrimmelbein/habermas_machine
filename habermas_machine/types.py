@@ -20,6 +20,7 @@ import enum
 from habermas_machine.llm_client import aistudio_client
 from habermas_machine.llm_client import base_client
 from habermas_machine.llm_client import mock_client
+from habermas_machine.llm_client import poe_client """Added Poe Client"""
 from habermas_machine.reward_model import base_model
 from habermas_machine.reward_model import cot_ranking_model
 from habermas_machine.reward_model import length_based_model
