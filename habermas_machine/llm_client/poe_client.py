@@ -88,7 +88,6 @@ class PoeClient(base_client.LLMClient):
       print(f'Sleeping for 10 seconds to respect Poe rate limits...')
       time.sleep(10)
 
- self._model = OpenAIModel(model="gpt-4.1", system_prompt="You are a helpful assistant.")
 sample = self._model.generate_content(
     prompt,
     temperature=temperature,
