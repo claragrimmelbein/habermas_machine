@@ -4,8 +4,8 @@ from habermas_machine import machine, types
 class HabermasPoeBot(PoeBot):
     def __init__(self):
         # Poe-based language-model clients
-        statement_client = types.LLMClient.POE.get_client("Claude-3-Opus")
-        reward_client = types.LLMClient.POE.get_client("Claude-3-Opus")
+        statement_client = types.LLMCLient.POE.get_client("Claude-3-Opus")
+        reward_client = types.LLMCLient.POE.get_client("Claude-3-Opus")
         
 
         # Corresponding model task wrappers
