@@ -8,8 +8,8 @@ class HabermasPoeBot(PoeBot):
         reward_client    = types.LLMCLient.POE.get_client("Claude-3-Opus")
 
         # Create model wrappers that use the clients
-        statement_model = types.StatementModel.STATEMENT_GENERATION.get_model(statement_client)
-        reward_model    = types.RewardModel.REWARD_SCORING.get_model(reward_client)
+        statement_model = types.StatementModel.CHAIN_OF_THOUGHT.get_model(statement_client)
+        reward_model = types.RewardModel.CHAIN_OF_THOUGHT_RANKING.get_model(reward_client)
 
         # The deliberation question / topic
         question = "How can communities encourage sustainable energy adoption?"
