@@ -6,10 +6,11 @@ class HabermasPoeBot(PoeBot):
         # Poe-based language-model clients
         statement_client = types.LLMClient.POE.get_client("Claude-3-Opus")
         reward_client = types.LLMClient.POE.get_client("Claude-3-Opus")
+        
 
         # Corresponding model task wrappers
-        statement_model = types.StatementModel.STATEMENT_GENERATION.get_model(statement_client)
-        reward_model = types.RewardModel.REWARD_SCORING.get_model(reward_client)
+        statement_client = types.LLMCLient.POE.get_client("Claude-3-Opus")
+        reward_client = types.LLMCLient.POE.get_client("Claude-3-Opus")
 
         question = "How can communities encourage sustainable energy adoption?"
 
