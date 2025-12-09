@@ -32,4 +32,4 @@ class HabermasPoeBot(PoeBot):
         yield {"text": winner}
 
 if __name__ == "__main__":
-    run(HabermasPoeBot(), port=8080)
+    run(HabermasPoeBot())
