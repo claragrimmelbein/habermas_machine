@@ -1,5 +1,6 @@
 from fastapi_poe import PoeBot, run
 from habermas_machine import machine, types
+from habermas_machine.social_choice import schulze_method  # you can also try mock_method
 
 class HabermasPoeBot(PoeBot):
     def __init__(self):
@@ -14,14 +15,15 @@ class HabermasPoeBot(PoeBot):
         # The deliberation question / topic
         question = "How can communities encourage sustainable energy adoption?"
 
-        # Instantiate the Habermas Machine (notice we pass *all six* args)
+        # Instantiate the Habermas Machine
         self.hm = machine.HabermasMachine(
             question=question,
             statement_client=statement_client,
             reward_client=reward_client,
             statement_model=statement_model,
             reward_model=reward_model,
-            social_choice_method=types.SocialChoiceMethod.MAJORITY_VOTE,
+            # update: directly select a module as the social choice method
+            social_choice_method=schulze_method,
         )
 
     async def get_response(self, message, context):
