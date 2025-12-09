@@ -35,13 +35,18 @@ class PoeClient(base_client.LLMClient):
     """
     # The Poe API key is the 'p-b' cookie value from poe.com.
     # It is recommended to store this token in an environment variable.
-    try:
-        self._api_key = os.environ['POE_API_KEY']
-    except KeyError:
+    self._api_key = os.getenv("POE_API_KEY")
+    if not self._api_key:
+      raise EnvironmentError(
+          "The 'POE_API_KEY' environment variable is not set. "
+          "Visit https://poe.com/api to generate one and export it before running."
+      )
+
+  # Accept both old 'p‑b' cookies and new official Poe API keys
+    if len(self._api_key) < 32:
         raise EnvironmentError(
-            "The 'POE_API_KEY' environment variable is not set. "
-            "Please set it to your Poe 'p-b' cookie value."
-        )
+          f"Invalid Poe API key: expected ≥32 characters, got {len(self._api_key)}"
+      )
 
     self._model_name = model_name
     self._sleep_periodically = sleep_periodically
