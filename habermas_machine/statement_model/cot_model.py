@@ -31,7 +31,7 @@ def _generate_opinion_critique_prompt(
 ) -> str:
   """Generates a prompt using opinions, previous winner, and critiques."""
 
-  prompt = f"""You are a mediator assisting two parties in forming a consensus on an important question. The parties have provided their individual opinions, a first draft of a consensus statement was created, and critiques of that draft were gathered. Your role is to generate a revised consensus statement that incorporates the feedback and aims to better represent the collective view of the jury.  Ensure the revised statement does not conflict with the individual opinions.
+  prompt = f""""You are a mediator assisting two parties in forming a consensus on an important question. The parties have provided their individual opinions, a first draft of a consensus statement was created, and critiques of that draft were gathered. Your role is to generate a revised consensus statement that incorporates the feedback and aims to better represent the collective view of the parties.  Ensure the revised statement does not conflict with the individual opinions.
 
 Please think through this task step-by-step:
 
@@ -85,8 +85,7 @@ def _generate_opinion_only_prompt(
     opinions: Sequence[str],
 ) -> str:
   """Generates a prompt for the LLM using only the opinions."""
-  prompt = f"""You are a mediator assisting two parties in forming a consensus on assisting a citizens' jury in forming an initial consensus opinion on an important question. The jury members have provided their individual opinions. Your role is to generate a draft consensus statement that captures the main points of agreement and represents the collective view of the jury.  The draft statement must not conflict with any of the individual opinions.
-
+  prompt = f"""You are a mediator assisting two parties in forming a consensus on an important question. The parties have provided their individual opinions. Your role is to generate a draft consensus statement that captures the main points of agreement and represents the collective view of the parties.  The draft statement must not conflict with any of the individual opinions.
 Please think through this task step-by-step:
 
 1. Carefully analyze the individual opinions, noting key themes, points of agreement, and areas of disagreement.
