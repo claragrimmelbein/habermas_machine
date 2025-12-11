@@ -1,3 +1,8 @@
+# Adapted Verison of Below
+
+## This is focused on attempting to use the habermas machine for legal mediation
+
+
 # Habermas Machine dataset
 
 This repository contains the Habermas Machine dataset, used in
