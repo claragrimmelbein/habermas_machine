@@ -1,4 +1,4 @@
-# Adapted Verison of Below
+## Adapted Verison of Below
 
 ## This is focused on attempting to use the habermas machine for legal mediation
 
