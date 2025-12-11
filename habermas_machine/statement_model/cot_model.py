@@ -37,8 +37,8 @@ Please think through this task step-by-step:
 
 1. Carefully analyze the individual opinions, noting key themes, points of agreement, and areas of disagreement.
 2. Review the previous draft consensus statement and identify its strengths and weaknesses.
-3. Analyze the critiques of the previous draft, paying attention to specific suggestions and concerns raised by the jury members.
-4. Based on the opinions, the previous draft, and the critiques, synthesize a revised consensus statement that addresses the concerns raised and better reflects the collective view of the jury. Ensure the statement is clear, concise, addresses the core issue posed in the question, and *does not conflict* with any of the individual opinions.  Refer to specific opinion and critique numbers when making your revisions.
+3. Analyze the critiques of the previous draft, paying attention to specific suggestions and concerns raised by the party members.
+4. Based on the opinions, the previous draft, and the critiques, synthesize a revised consensus statement that addresses the concerns raised and better reflects the collective view of the parties. Ensure the statement is clear, concise, addresses the core issue posed in the question, and *does not conflict* with any of the individual opinions.  Refer to specific opinion and critique numbers when making your revisions.
 
 Provide your answer in the following format:
 <answer>
@@ -58,7 +58,7 @@ We propose converting the old factory site into a park, funded by a combination 
 </answer>
 
 
-Below you will find the question, the individual opinions, the previous draft consensus statement, and the critiques provided by the jury members.
+Below you will find the question, the individual opinions, the previous draft consensus statement, and the critiques provided by the party members.
 
 
 Question: {question}
@@ -89,7 +89,7 @@ def _generate_opinion_only_prompt(
 Please think through this task step-by-step:
 
 1. Carefully analyze the individual opinions, noting key themes, points of agreement, and areas of disagreement.
-2. Based on the analysis, synthesize a concise and clear consensus statement that represents the shared perspective of the jury members.  Address the core issue posed in the question, and ensure the statement *does not conflict* with any of the individual opinions.  Refer to specific opinion numbers to demonstrate how the draft reflects the collective view.
+2. Based on the analysis, synthesize a concise and clear consensus statement that represents the shared perspective of the party members.  Address the core issue posed in the question, and ensure the statement *does not conflict* with any of the individual opinions.  Refer to specific opinion numbers to demonstrate how the draft reflects the collective view.
 
 Provide your answer in the following format:
 <answer>
@@ -107,7 +107,7 @@ We believe that investing in public transport, along with promoting cycling and 
 </answer>
 
 
-Below you will find the question and the individual opinions of the jury members.
+Below you will find the question and the individual opinions of the the parties members.
 
 Question: {question}
 
