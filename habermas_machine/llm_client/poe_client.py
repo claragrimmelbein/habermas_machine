@@ -8,8 +8,7 @@ import os
 import time
 import openai
 
-# The 'poe-api' library is used to interact with Poe.
-# You can install it with: pip install poe-api
+# the 'poe-api' library is used to interact with Poe.
 from openai import OpenAI
 from typing_extensions import override
 
@@ -33,8 +32,7 @@ class PoeClient(base_client.LLMClient):
         on poe.com, e.g., 'Claude-3-Opus', 'GPT-4', 'Llama-3-70b'.
       sleep_periodically: Sleep between API calls to avoid potential rate limits.
     """
-    # The Poe API key is the 'p-b' cookie value from poe.com.
-    # It is recommended to store this token in an environment variable.
+    # Poe API key is the 'p-b' cookie value from poe.com.
     self._api_key = os.getenv("POE_API_KEY")
     if not self._api_key:
       raise EnvironmentError(
@@ -42,7 +40,7 @@ class PoeClient(base_client.LLMClient):
           "Visit https://poe.com/api to generate one and export it before running."
       )
 
-  # Accept both old 'p‑b' cookies and new official Poe API keys
+  # accepts both old 'p‑b' cookies and new official Poe API keys
     if len(self._api_key) < 32:
         raise EnvironmentError(
           f"Invalid Poe API key: expected ≥32 characters, got {len(self._api_key)}"
@@ -52,12 +50,13 @@ class PoeClient(base_client.LLMClient):
     self._sleep_periodically = sleep_periodically
 
 
-    # Configuration for periodic sleeping to manage rate limits.
+    # configuration for periodic sleeping to manage rate limits.
     self._calls_between_sleeping = 10
     self._n_calls = 0
 
     self._client = openai.OpenAI(
-    api_key=os.getenv("POE_API_KEY"), # https://poe.com/api_key
+    # https://poe.com/api_key
+    api_key=os.getenv("POE_API_KEY"), 
     base_url="https://api.poe.com/v1",
 )
 
@@ -79,13 +78,11 @@ class PoeClient(base_client.LLMClient):
     from the base client's interface. These parameters are ignored.
     """
     # --- Parameter Handling ---
-    # The Poe API, as accessed by the 'poe-api' library, does not directly
-    # support the following parameters. They are included for interface
-    # compatibility but are not used in the API call.
-    del max_tokens  # Not supported. Length is controlled by the model's output.
-    del temperature # Not supported. Temperature is configured on the Poe bot itself.
-    del timeout     # Not supported. Timeout is handled by the underlying HTTP library.
-    del seed        # Not supported. Poe does not offer a seed for reproducibility.
+    # unused parameters, but area for future improvement of model
+    del max_tokens  
+    del temperature 
+    del timeout     
+    del seed        
 
     # --- Rate Limiting ---
     self._n_calls += 1
@@ -109,7 +106,7 @@ class PoeClient(base_client.LLMClient):
             stream=False,
         )
     
-        # Extract Model Text Safely
+        # extract model text safely
         response_text = ""
         if resp and getattr(resp, "choices", None):
             msg = resp.choices[0].message
@@ -117,14 +114,13 @@ class PoeClient(base_client.LLMClient):
                 response_text = msg.content
     
     except Exception as e:
-        # Catching a broad exception as the library might raise various errors
-        # (e.g., connection errors, invalid bot name, token issues).
+        # catching a broad exception as the lib might raise errors
         print(f"An error occurred with the Poe API call: {e}")
         print(f"Bot: {self._model_name}")
         print(f"Prompt: {prompt}")
-        return ""  # Return an empty string on failure, maintaining original behavior.
+        return ""  
 
     # --- Post-processing ---
-    # Since the Poe API doesn't support 'stop_sequences' (terminators),
+    # poe API doesn't support terminators
     # we manually truncate the response at the first occurrence of a terminator.
     return utils.truncate(response_text, delimiters=terminators)
